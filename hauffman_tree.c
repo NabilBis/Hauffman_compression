@@ -17,14 +17,14 @@ void addRightNode(struct HauffmanNode *node, struct HauffmanNode *right)
 }
 
 
-struct HauffmanNode* mergeTwoNodes(struct HauffmanNode *n1, struct HauffmanNode *n2)
+struct HauffmanNode* mergeTwoNodes(struct HauffmanNode *right, struct HauffmanNode *left)
 {
     struct HauffmanNode *node = malloc(sizeof(struct HauffmanNode));
     
-    node->key = 0;
-    node->occurences = n1->occurences + n2->occurences;
-    addRightNode(node, n1);
-    addLeftNode(node, n2);
+    node->key = 48;
+    node->occurences = right->occurences + left->occurences;
+    addRightNode(node, right);
+    addLeftNode(node, left);
     
     return node;
 }
@@ -55,8 +55,8 @@ struct HauffmanNode** nodesArray(int *ascii)
             j++;
         }
     }
+
     nodeArr = malloc((j+1)*sizeof(struct HauffmanNode*));
-    
     for(int u=0; u<=255; u++)
     {
         if(*(ascii+u))
@@ -95,17 +95,34 @@ int* countOccurence(char* str)
 void printNode(struct HauffmanNode node)
 {
 //    printf("Hauffman Node :\n  char = %c\n    ascii code = %u\n      occurences = %d\n\n", (char)node.key, node.key, node.occurences);
-    printf("(%c , %d)    ", (char)node.key, node.occurences);
+    printf("(%c , %d)    \n", (char)node.key, node.occurences);
 }
 
-void buildTree(struct HauffmanNode** nodesArr)
+void mergeAndTranslate(struct HauffmanNode** nodeTab)
 {
+    int tabCount=0;
+//    printf("\n++++++\n");printNode(**(nodeTab+1));printf("-----\n");
+    while(*(nodeTab+tabCount)!= NULL) tabCount++;
+    
+    *(nodeTab+0) = mergeTwoNodes(*nodeTab, *(nodeTab+1));
+    
+    for(int w=1; w<tabCount-1; w++)
+    {
+        *(nodeTab+w) = *(nodeTab+w+1);
+    }
+//    printf("\n--%d--\n", tabCount);printNode(**(nodeTab+1));printf("-----\n");
+    *(nodeTab+tabCount-1) = NULL;
+}
+void buildTree(struct HauffmanNode** nodesArr, int low, int high)
+{
+//    if((*nodesArr+0)->left != NULL)
+//        printNode(*(*nodesArr+0)->left);
     if( *(nodesArr+1) == NULL) return;
     
-    ////// nodeIndex0 = mergeTwoNodes(nodeIndex0, nodeIndex1);
-    /////  quickSortNodes(nodesArr);
-    ////   builtTree(nodesArr);
-    
+    mergeAndTranslate(nodesArr);
+    nodeQuickSort(nodesArr, low, high-1);
+    buildTree(nodesArr, low, high-1);
+
 }
 
 

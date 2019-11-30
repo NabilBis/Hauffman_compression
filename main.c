@@ -5,9 +5,10 @@ int main(int args, char** argv)
 {
     char* phrase = "Angel giwgiwwwww HadidiH always and foreverzz";
     char* hadid = "Nabiliwww";
-    int *ascii = countOccurence(phrase);
+    int *ascii = countOccurence(hadid);
     struct HauffmanNode **nodeTab = nodesArray(ascii);
     int f=0;
+    int u=0;
     
     do {
         printNode(**(nodeTab+f));
@@ -18,14 +19,15 @@ int main(int args, char** argv)
     printf("\n\n------SORT-------\n\n\n");
     
     nodeQuickSort(nodeTab, 0, f-1);
-    f=0;
     
-    while(*(nodeTab+f)!= NULL)
+    while(*(nodeTab+u)!= NULL)
     {
-        printNode(**(nodeTab+f));
-        f++;
+        printNode(**(nodeTab+u));
+        u++;
     }
     
     printf("\n\n\n");
+    buildTree(nodeTab, 0,f-1);
+//    printNode(*((*nodeTab+0)->right->right->right->right->right));
     return EXIT_SUCCESS;
 }

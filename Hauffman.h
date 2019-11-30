@@ -22,4 +22,5 @@ void swapNode(struct HauffmanNode *n1, struct HauffmanNode *n2);
 struct HauffmanNode** nodesArray(int *ascii);
 int* countOccurence(char* str);
 void printNode(struct HauffmanNode node);
+void buildTree(struct HauffmanNode** nodesArr, int low, int high);
 #endif
