@@ -17,7 +17,7 @@ int partition(struct HauffmanNode** nodeArr, int low, int high)
     
     for(int l=low; l<high; l++)
     {
-        if((**(nodeArr+l)).occurences>=pivot)
+        if((**(nodeArr+l)).occurences<=pivot)
         {
             i++;
             swapNode(*(nodeArr+i), *(nodeArr+l));

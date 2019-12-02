@@ -101,7 +101,7 @@ void printNode(struct HauffmanNode node)
 void mergeAndTranslate(struct HauffmanNode** nodeTab)
 {
     int tabCount=0;
-//    printf("\n++++++\n");printNode(**(nodeTab+1));printf("-----\n");
+
     while(*(nodeTab+tabCount)!= NULL) tabCount++;
     
     *(nodeTab+0) = mergeTwoNodes(*nodeTab, *(nodeTab+1));
@@ -110,9 +110,10 @@ void mergeAndTranslate(struct HauffmanNode** nodeTab)
     {
         *(nodeTab+w) = *(nodeTab+w+1);
     }
-//    printf("\n--%d--\n", tabCount);printNode(**(nodeTab+1));printf("-----\n");
+
     *(nodeTab+tabCount-1) = NULL;
 }
+
 void buildTree(struct HauffmanNode** nodesArr, int low, int high)
 {
 //    if((*nodesArr+0)->left != NULL)

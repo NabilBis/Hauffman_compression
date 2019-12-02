@@ -1,6 +1,13 @@
 #include "hauffman.h"
 
-
+void preOrder(struct HauffmanNode *head){
+    if(head == NULL)
+        return;
+    printf("%c %d \n", head->key, head->occurences);
+    
+    preOrder(head->left);
+    preOrder(head->right);
+}
 int main(int args, char** argv)
 {
     char* phrase = "Angel giwgiwwwww HadidiH always and foreverzz";
@@ -28,6 +35,7 @@ int main(int args, char** argv)
     
     printf("\n\n\n");
     buildTree(nodeTab, 0,f-1);
-//    printNode(*((*nodeTab+0)->right->right->right->right->right));
+    preOrder(*(nodeTab+0));
+//    printNode(*(*nodeTab+0));//->right->right->right->right->right));
     return EXIT_SUCCESS;
 }
