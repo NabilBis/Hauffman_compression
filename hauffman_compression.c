@@ -95,7 +95,7 @@ int* countOccurence(char* str)
 void printNode(struct HauffmanNode node)
 {
 //    printf("Hauffman Node :\n  char = %c\n    ascii code = %u\n      occurences = %d\n\n", (char)node.key, node.key, node.occurences);
-    printf("(%c , %d)    \n", (char)node.key, node.occurences);
+    printf("(%c , %d)    ", (char)node.key, node.occurences);
 }
 
 void mergeAndTranslate(struct HauffmanNode** nodeTab)
@@ -116,8 +116,6 @@ void mergeAndTranslate(struct HauffmanNode** nodeTab)
 
 void buildTree(struct HauffmanNode** nodesArr, int low, int high)
 {
-//    if((*nodesArr+0)->left != NULL)
-//        printNode(*(*nodesArr+0)->left);
     if( *(nodesArr+1) == NULL) return;
     
     mergeAndTranslate(nodesArr);
