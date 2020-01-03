@@ -1,10 +1,4 @@
 #include "hauffman.h"
-    //// Hauffman STEPS:
-        //// Count the occurences of a "Byte"
-        //// Sort the occurences in an ascending order
-        //// Merge two nodes (the head of the tree contains the sum of the merged nodes)
-        //// Repeat step 2 and 3
-    //// String
 
 void addLeftNode(struct HauffmanNode *node, struct HauffmanNode *left)
 {
@@ -15,7 +9,6 @@ void addRightNode(struct HauffmanNode *node, struct HauffmanNode *right)
 {
     node->right = right;
 }
-
 
 struct HauffmanNode* mergeTwoNodes(struct HauffmanNode *right, struct HauffmanNode *left)
 {
@@ -37,7 +30,7 @@ struct HauffmanNode* newNode(unsigned char key, int occ)
     node->occurences = occ;
     node->left = NULL;
     node->right = NULL;
-
+    
     return node;
 }
 
@@ -55,7 +48,7 @@ struct HauffmanNode** nodesArray(int *ascii)
             j++;
         }
     }
-
+    
     nodeArr = malloc((j+1)*sizeof(struct HauffmanNode*));
     for(int u=0; u<=255; u++)
     {
@@ -73,35 +66,10 @@ struct HauffmanNode** nodesArray(int *ascii)
 }
 
 
-int* countOccurence(char* str)
-{
-    int *ascii = malloc(256*sizeof(int));
-    int i=0;
-    unsigned char index;
-    
-    for(int f=0; f<256; f++)
-        *(ascii+f) = 0;
-    
-    while(*(str + i) != '\0')
-    {
-        index = *(str+i);
-        (*(ascii+index))++;
-        i++;
-    }
-    
-    return ascii;
-}
-
-void printNode(struct HauffmanNode node)
-{
-//    printf("Hauffman Node :\n  char = %c\n    ascii code = %u\n      occurences = %d\n\n", (char)node.key, node.key, node.occurences);
-    printf("(%c , %d)    ", (char)node.key, node.occurences);
-}
-
 void mergeAndTranslate(struct HauffmanNode** nodeTab)
 {
     int tabCount=0;
-
+    
     while(*(nodeTab+tabCount)!= NULL) tabCount++;
     
     *(nodeTab+0) = mergeTwoNodes(*nodeTab, *(nodeTab+1));
@@ -110,7 +78,7 @@ void mergeAndTranslate(struct HauffmanNode** nodeTab)
     {
         *(nodeTab+w) = *(nodeTab+w+1);
     }
-
+    
     *(nodeTab+tabCount-1) = NULL;
 }
 
@@ -121,7 +89,5 @@ void buildTree(struct HauffmanNode** nodesArr, int low, int high)
     mergeAndTranslate(nodesArr);
     nodeQuickSort(nodesArr, low, high-1);
     buildTree(nodesArr, low, high-1);
-
+    
 }
-
-

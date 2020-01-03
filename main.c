@@ -1,30 +1,17 @@
 #include "hauffman.h"
 
 
-///////////////////////////////
-void preOrder(struct HauffmanNode *head){
-    if(head == NULL)
-        return;
-    printf("%c %d \n", head->key, head->occurences);
-    
-    preOrder(head->left);
-    preOrder(head->right);
-}
-///////////////////////////////
-
 int main(int args, char** argv)
 {
-    int f=0;
-    char* input = "Nabiliwww";
-    int *ascii = countOccurence(input);
-    struct HauffmanNode **nodeTab = nodesArray(ascii);
+    int fileDsc = open(argv[1], O_RDWR, 0644);
+
+    if(fileDsc<1){
+        printf("Couldnt read nor create file %s\n", argv[1]);
+        return 0;
+    }
     
-    while(*(nodeTab+f) != NULL)
-        f++;
-    
-    nodeQuickSort(nodeTab, 0, f-1);
-    buildTree(nodeTab, 0,f-1);
-    preOrder(*(nodeTab+0));
+    compress(fileDsc);
+    close(fileDsc);
     
     return EXIT_SUCCESS;
 }

@@ -3,6 +3,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 struct HauffmanNode
 {
@@ -13,14 +15,10 @@ struct HauffmanNode
 };
 
 //////// sortNodes
-void quickSort(int* arr, int low, int high);
 void nodeQuickSort(struct HauffmanNode **arr, int low, int high);
-void swapNode(struct HauffmanNode *n1, struct HauffmanNode *n2);
-
 ////////
 
 struct HauffmanNode** nodesArray(int *ascii);
-int* countOccurence(char* str);
-void printNode(struct HauffmanNode node);
 void buildTree(struct HauffmanNode** nodesArr, int low, int high);
+void compress(int);
 #endif
